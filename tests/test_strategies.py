@@ -3,6 +3,7 @@ from src.strategies.crawl_tld import CrawlTLD
 from src.strategies.bruteforce import BruteForce
 from src.strategies.srv_scanner import SRVScanner
 from src.strategies.reverse_dns import IPNeighbors
+from src.strategies.standard_records import StandardRecords
 
 
 def test_reverse_dns_logic():
@@ -54,3 +55,10 @@ def test_ip_neighbors_logic():
 def test_ip_neighbors_invalid():
     strategy = IPNeighbors()
     assert strategy.run("not-an-ip") == []
+
+
+def test_standard_records_integration():
+    strategy = StandardRecords()
+    results = strategy.run("google.com")
+    assert isinstance(results, list)
+    assert len(results) > 0
