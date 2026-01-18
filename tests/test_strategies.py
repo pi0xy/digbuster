@@ -2,7 +2,7 @@ from src.strategies.reverse_dns import ReverseDNS
 from src.strategies.crawl_tld import CrawlTLD
 from src.strategies.bruteforce import BruteForce
 from src.strategies.srv_scanner import SRVScanner
-
+from src.strategies.reverse_dns import IPNeighbors
 
 
 def test_reverse_dns_logic():
@@ -36,7 +36,21 @@ def test_srv_scanner_structure():
     assert isinstance(results, list)
     assert len(results) == 0
 
+
 def test_srv_scanner_integration():
     strategy = SRVScanner()
     results = strategy.run("microsoft.com")
     assert isinstance(results, list)
+
+
+def test_ip_neighbors_logic():
+    strategy = IPNeighbors()
+    results = strategy.run("1.2.3.4")
+    assert "1.2.3.3" in results
+    assert "1.2.3.5" in results
+    assert len(results) == 2
+
+
+def test_ip_neighbors_invalid():
+    strategy = IPNeighbors()
+    assert strategy.run("not-an-ip") == []

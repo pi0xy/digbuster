@@ -1,4 +1,3 @@
-import pytest
 from src.strategies.txt_parser import TXTParser
 
 
