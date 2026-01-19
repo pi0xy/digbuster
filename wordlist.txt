@@ -1,0 +1,16 @@
+www
+mail
+api
+dev
+test
+stage
+staging
+admin
+portal
+vpn
+ssh
+remote
+status
+api-dev
+www2
+wifi

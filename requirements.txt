@@ -1,4 +1,3 @@
 dnspython
-pytest
-flake8
 graphviz
+ipaddress

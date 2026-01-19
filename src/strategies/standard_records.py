@@ -5,7 +5,7 @@ from src.strategies.base import DNSStrategy
 class StandardRecords(DNSStrategy):
     def __init__(self, resolver=None):
         super().__init__(resolver)
-        self.record_types = ["A", "AAAA", "MX", "CNAME", "SOA"]
+        self.record_types = ["A", "AAAA", "MX", "CNAME", "SOA", "NS"]
 
     def run(self, domain):
         found = []
@@ -17,7 +17,7 @@ class StandardRecords(DNSStrategy):
                         found.append(str(rdata.address))
                     elif record_type == "MX":
                         found.append(str(rdata.exchange).rstrip('.'))
-                    elif record_type == "CNAME":
+                    elif record_type in ["CNAME", "NS"]:
                         found.append(str(rdata.target).rstrip('.'))
                     elif record_type == "SOA":
                         found.append(str(rdata.mname).rstrip('.'))
@@ -25,3 +25,5 @@ class StandardRecords(DNSStrategy):
                 continue
 
         return list(set(found))
+
+

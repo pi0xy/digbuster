@@ -3,4 +3,4 @@ class DNSStrategy:
         self.resolver = resolver
 
     def run(self, target):
-        raise NotImplementedError("La stratégie doit implémenter la méthode run()")
+        raise NotImplementedError("The strategy needs to implement the run() method.")

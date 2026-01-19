@@ -4,6 +4,8 @@ from src.strategies.bruteforce import BruteForce
 from src.strategies.srv_scanner import SRVScanner
 from src.strategies.reverse_dns import IPNeighbors
 from src.strategies.standard_records import StandardRecords
+from src.engine import DiscoveryEngine
+
 
 
 def test_reverse_dns_logic():
@@ -14,7 +16,7 @@ def test_reverse_dns_logic():
 
 def test_reverse_dns_invalid_ip():
     strategy = ReverseDNS()
-    results = strategy.run("999.999.999.999")  # Impossible IP
+    results = strategy.run("999.999.999.999")
     assert results == []
 
 
@@ -62,3 +64,11 @@ def test_standard_records_integration():
     results = strategy.run("google.com")
     assert isinstance(results, list)
     assert len(results) > 0
+
+
+def test_engine_run():
+    engine = DiscoveryEngine(depth=1)
+    results = engine.run("example.com")
+    assert isinstance(results, dict)
+    assert "example.com" in engine.visited
+
